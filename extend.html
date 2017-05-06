@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+	<title>Comment marier Symfony et ReactJS ?</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="styles/prism.css" />
+	<link rel="stylesheet" href="styles/custom.css">
+</head>
+<body class="list">
+	<section class="slide"><div>
+		<h2>Performances</h2>
+		<p>Test sur du javascript simple</p>
+		<table>
+			<tr><td>PHP (7.1)</td><td>~0.72s</td></tr>
+			<tr><td>Navigateur (Chrome 58)</td><td>~0.12s</td></tr>
+			<tr><td>Serveur node externe (7.2)</td><td>~0.05s</td></tr>
+			<tr><td>node.js en ligne de commande (7.2)</td><td>~0.18s</td></tr>
+			<tr><td>V8Js</td><td>~0.12s</td></tr>
+		</table>
+		<ul class="note">
+			<li>Création de deux tableaux en remplissant avec index * 2 puis boucles for imbriquées avec un if</li>
+			<li>Feature flag pour activer / désactiver le rendu serveur en cas de fortes charges</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Lequel choisir ?</h2>
+		<table class="striped">
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">Serveur node</th>
+				<th scope="col">node.js</th>
+				<th scope="col">V8Js</th>
+			</tr>
+			<tr>
+				<th scope="row">Rapidité</th>
+				<td>Le plus rapide</td>
+				<td>Plus lent <br />(code copié dans un fichier puis <br />ré-interprété)</td>
+				<td>Plus lent <br />(code copié via memcpy puis <br />ré-interprété)</td>
+			</tr>
+			<tr>
+				<th scope="row">Mise en place</th>
+				<td>Plus complexe</td>
+				<td>Plus simple</td>
+				<td>Plus simple</td>
+			</tr>
+			<tr>
+				<th scope="row">Mise à jour</th>
+				<td>Nécessite de relancer le serveur <br />à chaque modification</td>
+				<td>En temps réél</td>
+				<td>En temps réél</td>
+			</tr>
+			<tr>
+				<th scope="row">Adapté pour</th>
+				<td>Production</td>
+				<td>Développement</td>
+				<td>Développement</td>
+			</tr>
+		</table>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Directement</h2>
+		<div>
+			<pre style="font-size:10px; width: 65%;"><code class="language-javascript"><!--
+-->{% block content %}
+  &lt;div id="search-page">&lt;/div>
+{% endblock %}
+
+{% block javascripts %}
+  &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.js"&gt;&lt;/script&gt;
+  &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.js"&gt;&lt;/script&gt;
+
+  &lt;script type="application/javascript"&gt;
+    var SearchPage = React.createClass({
+      render: function() {
+        var categories = [];
+        for (var i in this.props.categories) {
+          categories.push(React.createElement(SearchCategory, {key: i, category: this.props.category[i]}));
+        }
+        return React.createElement("ul", null, categories);
+      }
+    });
+
+    ReactDOM.render(
+      React.createElement(SearchPage, {items: JSON.parse('{{ categories | raw }}')}),
+        document.getElementById('search-page')
+      );
+  &lt;/script&gt;
+{% endblock %}<!--
+			--></code></pre>
+		</div>
+		<div class="place r" style="text-align: right;">
+			<img src="pictures/in-twig-result.png" style="width: 65%;" />
+		</div>
+		<ul class="note">
+			<li>Très verbeux, peu lisible</li>
+			<li>Le code n'est pas découplé</li>
+			<li><b>On ne peut pas réutiliser les composants</b></li>
+		</ul>
+	</div></section>
+
+	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<script src="styles/prism.js"></script>
+	<script src="styles/jquery-2.1.1.min.js"></script>
+	<script src="styles/progress.js"></script>
+</body>
+</html>

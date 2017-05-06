@@ -1,0 +1,4 @@
+.DS_Store
+demo/node_modules/
+demo/vendor/
+.idea/*

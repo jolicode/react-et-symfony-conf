@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Avec Limenius{% endblock %}
+
+{% block content %}
+    {{ react_component('TodoList', {'props': props, 'rendering': 'client_side', 'trace': true}) }}
+{% endblock %}

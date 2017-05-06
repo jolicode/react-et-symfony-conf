@@ -1,0 +1,62 @@
+{
+  "name": "react-et-symfony-conf-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack-serverside": "webpack --config webpack.config.serverside.js --watch",
+    "webpack-dev": "webpack-dev-server --hot --inline --progress --colors --config webpack.config.js --port 8080 --output-public-path=http://localhost:8080/assets/build/",
+    "lint": "eslint client/js"
+  },
+  "keywords": [
+    "symfony",
+    "react",
+    "jsx",
+    "reactjs",
+    "server-side",
+    "rendering",
+    "isomorphic"
+  ],
+  "dependencies": {
+    "babel-polyfill": "^6.20.0",
+    "babel-runtime": "^6.22.0",
+    "bootstrap-sass": "^3.3.7",
+    "classnames": "^2.2.5",
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.17.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-on-rails": "4.0",
+    "react-router-dom": "next",
+    "whatwg-fetch": "^2.0.2"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "case-sensitive-paths-webpack-plugin": "^1.1.4",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.13.1",
+    "eslint-config-rackt": "^1.1.1",
+    "eslint-plugin-react": "^6.9.0",
+    "exports-loader": "^0.6.3",
+    "expose-loader": "^0.7.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.5",
+    "file-loader": "^0.9.0",
+    "node-sass": "^4.3.0",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0",
+    "webpack-merge": "^2.4.0"
+  }
+}

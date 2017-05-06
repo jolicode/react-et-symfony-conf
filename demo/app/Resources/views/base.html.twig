@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container">
+            <h1 style="margin-top:3em;">{% block h1 %}{% endblock %}</h1>
+            <div style="margin-top: 12em">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        {% block javascripts %}
+            <script src="{{ asset('client-bundle.js', 'react') }}"></script>
+        {% endblock %}
+    </body>
+</html>

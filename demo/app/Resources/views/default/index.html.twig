@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Comment marier React et Symfony ?{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="btn-toolbar">
+                <a class="btn btn-lg btn-primary" href="{{ path('reactWithLimenius') }}">
+                    React avec Limenius
+                </a>
+                <a class="btn btn-lg btn-primary" href="{{ path('reactInTwig') }}">
+                    Directement dans Twig
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

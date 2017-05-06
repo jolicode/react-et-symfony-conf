@@ -1,0 +1,523 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+	<title>Comment marier Symfony et ReactJS ?</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="styles/prism.css" />
+	<link rel="stylesheet" href="styles/custom.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Comment marier Symfony et ReactJS ?</h1>
+		<p>PHP Tour Nantes - Claire Coloma et Suzanne Favot - 18 mai 2017</p>
+	</header>
+
+	<section class="slide cover w" id="coverpage"><div>
+		<div class="covertitle">
+			<h2>Comment marier Symfony et ReactJS ?</h2>
+			<p>PHP Tour Nantes - <a href="http://twitter.com/_clairecoloma">Claire Coloma</a> et <a href="http://twitter.com/sfavot">Suzanne Favot</a> - <span class="date">18 mai 2017</span></p>
+		</div>
+		<img src="pictures/wedding.jpg" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Coucou, je suis Claire Coloma</h2>
+		<ul>
+			<li>Développeuse web et mobile chez <a href="http://jolicode.com"><img src="pictures/JoliCode_logo.png" width="120px" style="vertical-align: middle;" /></a></li>
+			<li><img src="pictures/twitter.png" style="width: 20px"> <a href="https://twitter.com/_clairecoloma">@_ClaireColoma</a></li>
+		</ul>
+
+		<h2>Coucou, je suis Suzanne Favot</h2>
+		<ul>
+			<li>Développeuse web @<a href="http://jolicode.com"><img src="pictures/JoliCode_logo.png" width="120px" style="vertical-align: middle;" /></a></li>
+			<li><img src="pictures/twitter.png" style="width: 20px"> <a href="https://twitter.com/sfavot">@SFavot</a></li>
+		</ul>
+	</div></section>
+
+	<!--<section class="slide cover w"><div>
+		<img src="covers/jolicode-bg.jpg" alt="" />
+	</div></section>-->
+
+	<section class="slide"><div>
+		<img class="place m" src="pictures/symfony-logo.jpg" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<img class="place m" src="pictures/react-logo.png" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>ReactJS</h2>
+		<ul>
+			<li>Librairie Javascript</li>
+			<li>Développée par Facebook et rendue open-source en 2013</li>
+			<li>Parsage du DOM => <b>DOM Virtuel</b></li>
+			<li>Render uniquement les éléments du DOM modifiés</li>
+			<li>Architecture en <b>composants</b> écrits en JSX</li>
+			<li>Chaque composant a un <b>état</b> (<b>state</b>) et des <b>propriétés</b> (<b>props</b>)</li>
+		</ul>
+
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Le DOM virtuel</h2>
+		<img class="place" style="width: 60%" src="pictures/react-dom.png" />
+		<ul class="note">
+			<li>Version abstraite du DOM physique, inclu son propre système d'évènements</li>
+			<li>Utilise l'api DOM</li>
+			<li>DOM, représentation abstraite des éléments HTML</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Composants</h2>
+		<ul>
+			<li>Code qui gère une partie spécifique de la page</li>
+			<li>Possède un lifecycle</li>
+		</ul>
+		<pre><code class="language-jsx"><!--
+-->class TodoList extends Component {
+  render() {
+    return (
+      &lt;div className="well"&gt;
+        /* Code du rendu */
+      &lt;/div&gt;
+    );
+  }
+}<!--
+		--></code></pre>
+		<ul class="note">
+			<li>élément central de React</li>
+			<li>"rendu" graphiquement à l'aide de la méthode render()"</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Props</h2>
+		<ul>
+			<li>Données passées du composant parent vers le composant enfant</li>
+			<li>Composant => fonction de props</li>
+		</ul>
+		<pre><code class="language-jsx"><!--
+-->&lt;Todo done={false} item={item} /&gt;<!--
+--></code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>State</h2>
+		<ul style="width:50%;">
+			<li>État d'un composant</li>
+			<li>"Variable locale" d'un composant</li>
+			<li>Géré par le composant lui-même</li>
+		</ul>
+		<pre class="place r" style="font-size: 12px"><code class="language-jsx"><!--
+-->class Todo extends Component {
+  constructor() {
+	super();
+
+  	this.state = {
+      visible: true,
+  	};
+  }
+
+  markAsDone() {
+    this.setState({
+	  visible: false,
+    });
+  }
+
+  render() {
+    if (!this.state.visible) {
+	  return null;
+	}
+
+	return (
+	  &lt;li&gt;
+	    &lt;span&gt;{this.props.item}&lt;/span&gt;
+		&lt;button onClick={this.markAsDone.bind(this)}>
+			Fait
+		&lt;/button&gt;
+	  &lt;/li&gt;
+	);
+  }
+}<!--
+    --></code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2 style="margin-bottom: 0;">L'écosystème React</h2>
+		<img src="pictures/logos.png" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Twig</h2>
+		<ul>
+			<li>Possible d'inclure et d'étendre les templates</li>
+			<li>Peu de dynamisme</li>
+			<li>Pas de maîtrise sur la donnée passée aux templates</li>
+			<li>Peu adapté aux interfaces complexes</li>
+		</ul>
+		<pre><code class="language-twig"><!--
+-->{% extends "base.html" %}
+
+{% block content %}
+
+    &lt;h1&gt;Bienvenue&lt;/h1&gt;
+
+    {% include 'AppBundle:Homepage:content.html.twig' %}
+
+{% endblock %}
+</code></pre>
+	</div></section>
+
+	<section class="slide cover w"><div>
+		<h2>Du React dans Symfony ???</h2>
+		<img src="pictures/mind-blown.gif" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Ça fait peur</h2>
+		<ul>
+			<li>Over-engineering...</li>
+			<li>Et le SEO ?</li>
+			<li>Et les temps de chargement ?</li>
+			<li>Et les (3) utilisateurs qui désactivent le JS ?</li>
+			<li>Et puis de toute façon le JS c'est pour les intégrateurs ! <img src="pictures/trollface.png" class="trollface" /> </li>
+		</ul>
+	</div></section>
+
+	<section class="slide cover w"><div>
+		<h2>On essaye quand même ?</h2>
+		<img src="pictures/dare.gif" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Quelles options ?</h2>
+		<ul>
+			<li>Dans une application à part qui consomme une API Symfony</li>
+			<li>Dans un fichier JS inclus dans Twig</li>
+			<li>En utilisant un bundle</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Projet 1</h2>
+		<ul>
+			<li>On a une API Symfony</li>
+			<li>On veut un back-office</li>
+			<li>Pour faire du CRUD basique</li>
+			<li>Avec une interface très dynamique</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Une API Symfony, un front React</h2>
+		<ul>
+			<li>Le schéma le plus "classique"</li>
+			<li>Risque de dupliquer la logique métier</li>
+			<li>Nécessite de bien séparer (ou partager) les rôles (traductions, validation...)</li>
+			<li>Solutions clés en main : api-platform-admin, admin-on-rest...</li>
+		</ul>
+		<ul class="note">
+			<li>Mais si on veut seulement quelques parties du site en React, comment on fait ?</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Projet 2</h2>
+		<ul>
+			<li>On a un site Symfony fait avec Twig</li>
+			<li>On veut une page de recherche</li>
+			<li>Sans rechargement de la page</li>
+			<li>Avec des filtres dynamiques</li>
+		</ul>
+	</div></section>
+
+	<section class="slide cover w"><div>
+		<h2>Faire du React dans Twig</h2>
+		<img src="pictures/inception.gif" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2 style="">Javascript compilé et inclus dans Twig</h2>
+		<img src="pictures/searchpage_arborescence.png" class="place l" style="width:35%; left:90px; top:55%;" />
+		<div class="place r" style="width:45%; line-height:35px; top: 55%">
+			<p>Composants React déclarés à part proprement et compilés en un fichier</p>
+			<pre style="font-size: 12px;"><code class="language-twig"><!--
+-->{# layout.html.twig #}
+
+{% block body %}
+&lt;div
+	id="search-page"
+	data-categories="{{ categories|json_encode }}"
+&gt;&lt;/div&gt;
+{% endblock %}
+
+{% block javascripts %}
+	&lt;script type="text/javascript" src="{{ asset('searchpage.js') }}"&gt;&lt;/script&gt;
+{% endblock %}<!--
+			--></code></pre>
+		</div>
+	</div></section>
+
+	<section class="slide"><div>
+		<div class="place">
+			<pre><code class="language-jsx"><!--
+--> // index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import SearchPage from './SearchPage.jsx';
+
+const searchPageElement = document.querySelector('#search-page');
+const getData = (name, json = true) => {
+    const value = searchPageElement.getAttribute(`data-${name}`);
+    return json ? JSON.parse(value) : value;
+};
+
+const element = React.createElement(SearchPage, {
+    categories: getData('categories'),
+});
+
+ReactDOM.render(element, document.getElementById('search-page'));<!--
+			--></code></pre>
+		</div>
+	</div></section>
+
+	<section class="slide cover w"><div>
+		<h2>Et le référencement ?</h2>
+		<img src="pictures/seo.gif" alt="" />
+		<p class="note">
+			On veut mettre du React sur la homepage => problème : pas de référencement => solution : ?
+		</p>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Vu par un robot</h2>
+		<div class="place l" style="width: 35%; top: 55%;">
+			<p class="no-margin" style="text-align: center;">Avec Javascript</p>
+			<img src="pictures/nojs1.png" style="border: solid 1px lightgrey"/>
+		</div>
+		<div class="place r" style="width: 35%; top: 55%;">
+			<p class="no-margin" style="text-align: center;">Sans Javascript</p>
+			<img src="pictures/nojs2.png" style="border: solid 1px lightgrey"/>
+		</div>
+		<p class="note">
+			Nuancer à mort : la plupart des robots lisent le js et l'immense majorité des gens aussi<br/>
+			Transition vers React rendu serveur
+		</p>
+	</div></section>
+
+	<section class="slide cover w"><div>
+		<h2>Rendu serveur</h2>
+		<img src="pictures/amazing.gif" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Rendu serveur : fonctionnement</h2>
+		<img class="place m" src="pictures/serverside5.png" style="width: 600px; top: 55%;"/>
+		<img class="place m next" src="pictures/serverside4.png" style="width: 600px; top: 55%;"/>
+		<img class="place m next" src="pictures/serverside3.png" style="width: 600px; top: 55%;"/>
+		<img class="place m next" src="pictures/serverside2.png" style="width: 600px; top: 55%;"/>
+		<img class="place m next" src="pictures/serverside1.png" style="width: 600px; top: 55%;"/>
+		<ul class="note">
+			<li>Le serveur reçoit la requête</li>
+			<li>Il interprète lui-même le code React</li>
+			<li>Puis génère et sert le code HTML au client</li>
+			<li>React côté client peut alors reprendre la main</li>
+			<li>Il construit le DOM virtuel à partir du HTML généré</li>
+			<li>Puis s'exécute normalement</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Rendu serveur : pourquoi ?</h2>
+		<ul>
+			<li>Permettre la lecture par les robots (SEO)</li>
+			<li>Afficher du contenu pour <b>tous</b> les utilisateurs</li>
+			<li>Premier affichage plus rapide</li>
+			<li>Isomorphisme</li>
+		</ul>
+		<ul class="note">
+			<li>Google interprète déjà le JS</li>
+			<li>Plus rapide => dépend de comment est rendu le JS</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Avec un serveur node externe</h2>
+		<img class="place m" src="pictures/nodeserver5.png" style="width: 400px; top: 55%;"/>
+		<img class="place m next" src="pictures/nodeserver4.png" style="width: 400px; top: 55%;"/>
+		<img class="place m next" src="pictures/nodeserver3.png" style="width: 400px; top: 55%;"/>
+		<img class="place m next" src="pictures/nodeserver2.png" style="width: 400px; top: 55%;"/>
+		<img class="place m next" src="pictures/nodeserver1.png" style="width: 400px; top: 55%;"/>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Avec node.js en ligne de commande</h2>
+		<pre class="place m" style="font-size: 1.3em"><code class="language-js">
+exec('node ./test.js', $output);
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Avec V8Js</h2>
+		<ul>
+			<li>Extension PHP</li>
+			<li>Permet d'utiliser la librairie V8 de Google</li>
+			<li>Exécute le code Javascript directement dans PHP</li>
+		</ul>
+		<pre><code style="font-size: 14px" class="language-php"><!--
+-->$v8 = new V8Js();
+$v8->answer = 41;
+
+$js = "var life = {}; life.answer = PHP.answer; life.answer++; life.answer;";
+
+// Affiche 42
+$v8->executeString($js);<!--
+		--></code></pre>
+		<ul class="note">
+			<li>v8js va agir comme un contexte d'exécution auquel on peut ajouter des propriétés</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>PhpExecJs</h2>
+		<ul>
+			<li>Librairie en PHP</li>
+			<li>Détecte automatiquement le moyen à utiliser pour exécuter le Js (V8Js ou node.js)</li>
+			<li>Permet aussi d'utiliser un runner externe</li>
+		</ul>
+		<pre><code style="font-size: 14px" class="language-php">
+$phpexecjs = new PhpExecJs();
+
+$js = "Math.min(1, 2)";
+
+// Affiche 1
+$phpexecjs-&gt;evalJs($js);
+		</code></pre>
+		<ul class="note">
+			<li>en fonction de l'environnement</li>
+			<li>agnostique (indépendemment du contexte)</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>LimeniusReactBundle</h2>
+		<ul>
+			<li>Bundle Symfony</li>
+			<li>Inspiré de React on Rails</li>
+			<li>Une simple extension Twig pour le rendu</li>
+			<li>
+				Rendu serveur, client ou les deux !
+				<pre><code class="language-twig">
+	{{ react_component('HomePage', {'rendering': 'server_side'}) }}
+	{{ react_component('HomePage', {'rendering': 'client_side'}) }}
+	{{ react_component('HomePage', {'rendering': 'both'}) }}
+			</code></pre>
+			</li>
+			<li>Permet d'utiliser PhpExecJs ou un serveur node externe</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>LimeniusReactBundle - Mise en place (1)</h2>
+		<p>On crée les composants React à part</p>
+		<img src="pictures/arbo2.png" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>LimeniusReactBundle - Mise en place (2)</h2>
+		<p>On register les composants à rendre dans Twig grâce à React on Rails</p>
+		<pre><code class="language-jsx">
+// registration.js
+import ReactOnRails from 'react-on-rails';
+import HomePage from './components/HomePage';
+
+ReactOnRails.register({ HomePage });
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>LimeniusReactBundle - Mise en place (3)</h2>
+		<p>On build le code Javascript (par exemple avec Webpack) dans deux fichiers server-bundle.js et client-bundle.js.</p>
+		<img style="display: inline-block; width: 45%" src="pictures/arbo4.png" alt="" />
+		<img style="display: inline-block; width: 45%" src="pictures/arbo3.png" alt="" />
+	</div></section>
+
+	<!--<section class="slide"><div>
+		<h2>LimeniusReactBundle - Mise en place (4)</h2>
+		<ul>
+			<li>
+				Pour le rendu client, on précise dans Symfony où récupérer les assets pour React,
+				<pre><code class="language-yaml">
+framework:
+	assets:
+		packages:
+			react:
+				base_path: '/assets/build'
+					</code></pre>
+			</li>
+			<li>
+				et on inclut le code généré dans Twig.
+				<pre><code class="language-twig">
+&lt;script src="{{ asset('client-bundle.js', 'react') }}"&gt;&lt;/script&gt;
+				</code></pre>
+			</li>
+		</ul>
+	</div></section>-->
+
+	<section class="slide"><div>
+		<h2>LimeniusReactBundle - Mise en place (4)</h2>
+		<p>Enfin, on appelle nos composants en leur passant les props souhaitées.</p>
+		<pre><code class="language-twig">
+{{ react_component('HomePage', {'props': {'items': items}, 'rendering': 'both'}) }}
+		</code></pre>
+	</div></section>
+
+
+	<section class="slide cover w"><div>
+		<h2>Convaincus ?</h2>
+		<img src="pictures/convinced.gif" alt="" />
+	</div></section>
+
+	<section class="slide"><div>
+		<figure class="place m">
+			<blockquote>
+				<p class="shout">Ne faites pas du React si vous n'avez pas le besoin factuel et concret d'employer React</p>
+			</blockquote>
+			<figcaption>X.</figcaption>
+		</figure>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Pourquoi utiliser ReactJS avec Symfony ?</h2>
+		<ul>
+			<li>J'ai besoin de dynamiser une grande partie de mon site</li>
+			<li>Je veux faire la transition d'un front Twig vers un front full React</li>
+			<li>Je veux réaliser une interface complexe ou interactive</li>
+			<li>Je compte développer une application React Native et je veux pouvoir mutualiser mon code</li>
+		</ul>
+	</div></section>
+
+	<section class="slide cover w"><div>
+		<h2>Merci ! Et bon appétit ! 🍔</h2>
+		<p style="position: absolute; bottom: 40px; right: 0; z-index: 100; background-color: rgba(0,0,0,0.5); padding: 5px 20px;">
+			<a href="http://twitter.com/_clairecoloma">@_ClaireColoma</a> - <a href="http://twitter.com/sfavot">@SFavot</a> | <a href="http://jolicode.com"> <img style="position: relative; z-index: 100; width: 90px; vertical-align: bottom;" src="pictures/JoliCode_logo_white.svg" class="jolilogo"/></a>
+		</p>
+		<img src="pictures/mariage_minions.jpg"/>
+	</div></section>
+
+	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<script src="styles/prism.js"></script>
+	<script src="styles/jquery-2.1.1.min.js"></script>
+	<script src="styles/progress.js"></script>
+</body>
+</html>
